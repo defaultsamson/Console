@@ -11,7 +11,7 @@ At the beginning of your program, use the method
 This will set up the window and streams. From then on, all print calls from `System.out` or `System.err` will be put through the console streams.
 
 #### Visibility
-To set the visibility of the console, use the method `Console.setVisibility(true/false)` or alternatively use `Console.hide()` or `Console.show()`
+To set the visibility of the console, use the method `Console.setVisible(true/false)` or alternatively use `Console.hide()` or `Console.show()`
 
 #### Manipulating Streams
 
