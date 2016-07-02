@@ -13,12 +13,14 @@ public class MultiOutputStream extends OutputStream {
 
 		for (OutputStream out : streams) {
 			if (out != null)
-				this.streams.add(out);
+				addStream(out);
 		}
 	}
 
 	public void addStream(OutputStream stream) {
-		streams.add(stream);
+		synchronized (streams) {
+			streams.add(stream);
+		}
 	}
 
 	public List<OutputStream> getStreams() {
@@ -27,36 +29,46 @@ public class MultiOutputStream extends OutputStream {
 
 	@Override
 	public void write(int b) throws IOException {
-		for (OutputStream stream : streams) {
-			stream.write(b);
+		synchronized (streams) {
+			for (OutputStream stream : streams) {
+				stream.write(b);
+			}
 		}
 	}
 
 	@Override
 	public void write(byte[] b) throws IOException {
-		for (OutputStream stream : streams) {
-			stream.write(b);
+		synchronized (streams) {
+			for (OutputStream stream : streams) {
+				stream.write(b);
+			}
 		}
 	}
 
 	@Override
 	public void write(byte[] b, int off, int len) throws IOException {
-		for (OutputStream stream : streams) {
-			stream.write(b, off, len);
+		synchronized (streams) {
+			for (OutputStream stream : streams) {
+				stream.write(b, off, len);
+			}
 		}
 	}
 
 	@Override
 	public void flush() throws IOException {
-		for (OutputStream stream : streams) {
-			stream.flush();
+		synchronized (streams) {
+			for (OutputStream stream : streams) {
+				stream.flush();
+			}
 		}
 	}
 
 	@Override
 	public void close() throws IOException {
-		for (OutputStream stream : streams) {
-			stream.close();
+		synchronized (streams) {
+			for (OutputStream stream : streams) {
+				stream.close();
+			}
 		}
 	}
 }
