@@ -161,10 +161,14 @@ public class Console {
 		StyleConstants.setLineSpacing(set, -0.16F);
 		StyleConstants.setForeground(set, c);
 
+		text.setEditable(true);
+
 		int len = text.getDocument().getLength();
 		text.setCaretPosition(len);
 		text.setParagraphAttributes(set, false);
 		text.replaceSelection(msg);
+
+		text.setEditable(false);
 	}
 
 	/**
@@ -182,6 +186,10 @@ public class Console {
 	 */
 	public static void show() {
 		setVisible(true);
+	}
+
+	public static boolean isVisible() {
+		return instance().getJFrame().isVisible();
 	}
 
 	/**
